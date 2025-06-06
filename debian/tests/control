@@ -1,0 +1,7 @@
+Tests: build1
+Depends: build-essential,
+         libqglviewer-dev-qt5,
+         qtbase5-dev,
+         xauth,
+         xvfb
+Restrictions: allow-stderr

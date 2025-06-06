@@ -1,0 +1,28 @@
+#!/bin/sh
+# autopkgtest check: Build and run a program against libmedc
+# (C) 2013 Thomas Moulard
+# (C) 2014 Anton Gladky
+# Author: Thomas Moulard <thomas.moulard@gmail.com>
+#         Anton Gladky <gladk@debian.org>
+
+set -e
+
+WORKDIR=$(mktemp -d)
+trap "rm -rf $WORKDIR" 0 INT QUIT ABRT PIPE TERM
+
+cp -r ./examples $WORKDIR/
+cp    ./examples/examples.*   $WORKDIR/
+sed -i 's/lQGLViewer/lQGLViewer-qt5/g' $WORKDIR/examples/examples.pri
+
+for TEST in simpleViewer animation callback cameraLight clippingPlane constrainedCamera constrainedFrame drawLight ; do
+  cd $WORKDIR/examples/$TEST
+  qmake $TEST.pro
+  ls -l
+  make all
+
+  echo "build: OK"
+  [ -x $TEST ]
+done
+
+#timeout -s 1 2 xvfb-run --auth-file=a ./$TEST
+#echo "run: OK"
