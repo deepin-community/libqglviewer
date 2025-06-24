@@ -18,7 +18,7 @@ Architecture: any
 Section: libdevel
 Depends: libgl1-mesa-dev | libgl-dev,
          libglu1-mesa-dev [armel armhf],
-         libqglviewer2-qt5t64 (= ${binary:Version}),
+         libqglviewer2-qt5 (= ${binary:Version}),
          libqglviewer-headers,
          libqt5opengl5-dev,
          libx11-dev,
@@ -59,10 +59,7 @@ Description: OpenGL 3D viewer library - documentation and examples
  .
  This package contains documentation and examples.
 
-Package: libqglviewer2-qt5t64
-Provides: ${t64:Provides}
-Replaces: libqglviewer2-qt5
-Breaks: libqglviewer2-qt5 (<< ${source:Version})
+Package: libqglviewer2-qt5
 Architecture: any
 Multi-Arch: same
 Depends: ${misc:Depends},
